@@ -1,13 +1,3 @@
-# /// script
-# dependencies = [
-#     "lmfit",
-#     "pybroom",
-#     "latexify-py"
-#     "openlyxl"
-# ]
-# ///
-
-
 import marimo
 
 __generated_with = "0.9.10-dev11"
@@ -16,13 +6,10 @@ app = marimo.App(width="medium", app_title="rheology_flowcurvefit")
 
 @app.cell
 def __():
-    # import lmfit
     import pandas as pd
     import matplotlib.pyplot as plt
     from pathlib import Path
     import io
-    import xlrd
-    import pybroom
     import openpyxl
     import math
     from models import lmfit, model_dict
@@ -35,8 +22,6 @@ def __():
         openpyxl,
         pd,
         plt,
-        pybroom,
-        xlrd,
     )
 
 
@@ -45,6 +30,10 @@ async def __():
     import micropip
 
     await micropip.install("latexify-py")
+    await micropip.install("xlrd")
+    await micropip.install("pybroom")
+    
+    import pybroom
     import latexify
     return latexify, micropip
 
