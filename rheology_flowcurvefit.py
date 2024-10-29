@@ -12,22 +12,32 @@ async def __():
     await micropip.install("pybroom")
     await micropip.install("openpyxl")
     await micropip.install("xlrd")
+    await micropip.install("lmfit")
 
     import pybroom
     import latexify
     import openpyxl
-    return latexify, micropip, openpyxl, pybroom
+    import lmfit
 
-
-@app.cell
-def __():
     import pandas as pd
     import matplotlib.pyplot as plt
     from pathlib import Path
     import io
     import math
-    from models import lmfit, model_dict
-    return Path, io, lmfit, math, model_dict, pd, plt
+    from models import model_dict
+    return (
+        Path,
+        io,
+        latexify,
+        lmfit,
+        math,
+        micropip,
+        model_dict,
+        openpyxl,
+        pd,
+        plt,
+        pybroom,
+    )
 
 
 @app.cell
