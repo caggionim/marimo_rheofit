@@ -1,3 +1,13 @@
+# /// script
+# dependencies = [
+#     "lmfit",
+#     "pybroom",
+#     "latexify-py"
+#     "openlyxl"
+# ]
+# ///
+
+
 import marimo
 
 __generated_with = "0.9.10-dev11"
