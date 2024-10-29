@@ -1,3 +1,4 @@
 lmfit
 pybroom
 latexify-py
+openpyxl
