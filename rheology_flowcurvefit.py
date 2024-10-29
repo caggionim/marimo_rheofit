@@ -9,12 +9,14 @@ async def __():
     import micropip
 
     await micropip.install("latexify-py")
-    await micropip.install("xlrd")
     await micropip.install("pybroom")
+    await micropip.install("openpyxl")
+    await micropip.install("xlrd")
 
     import pybroom
     import latexify
-    return latexify, micropip, pybroom
+    import openpyxl
+    return latexify, micropip, openpyxl, pybroom
 
 
 @app.cell
@@ -23,10 +25,9 @@ def __():
     import matplotlib.pyplot as plt
     from pathlib import Path
     import io
-    import openpyxl
     import math
     from models import lmfit, model_dict
-    return Path, io, lmfit, math, model_dict, openpyxl, pd, plt
+    return Path, io, lmfit, math, model_dict, pd, plt
 
 
 @app.cell
