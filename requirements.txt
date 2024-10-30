@@ -2,3 +2,4 @@ lmfit
 pybroom
 latexify-py
 openpyxl
+marimo
