@@ -5,7 +5,27 @@ app = marimo.App(width="medium", app_title="rheology_flowcurvefit")
 
 
 @app.cell
-async def __():
+def __():
+    import sys
+    import marimo as mo
+    return mo, sys
+
+
+@app.cell
+async def __(mo, sys):
+    #only run this cell if kernel is pyodide
+    mo.stop(sys.executable!='/home/pyodide/this.program')
+
+    from pyodide.http import pyfetch
+
+    response = await pyfetch("https://raw.githubusercontent.com/caggionim/marimo_rheofit/refs/heads/main/models.py")
+    with open('models.py', 'wb') as file:
+        file.write(await response.bytes())
+
+    response = await pyfetch("https://raw.githubusercontent.com/caggionim/marimo_rheofit/refs/heads/main/rheo_widgets.py")
+    with open('rheo_widgets.py', 'wb') as file:
+        file.write(await response.bytes())
+
     import micropip
 
     await micropip.install("latexify-py")
@@ -13,7 +33,11 @@ async def __():
     await micropip.install("openpyxl")
     await micropip.install("xlrd")
     await micropip.install("lmfit")
+    return file, micropip, pyfetch, response
 
+
+@app.cell
+def __():
     import pybroom
     import latexify
     import openpyxl
@@ -24,14 +48,17 @@ async def __():
     from pathlib import Path
     import io
     import math
+
     from models import model_dict
+    from rheo_widgets import make_ui_parameters, make_parameters_from_ui
     return (
         Path,
         io,
         latexify,
         lmfit,
+        make_parameters_from_ui,
+        make_ui_parameters,
         math,
-        micropip,
         model_dict,
         openpyxl,
         pd,
@@ -41,11 +68,9 @@ async def __():
 
 
 @app.cell
-def __():
-    import marimo as mo
-
+def __(mo):
     mo.md("""# Rheology flow curve analsys""")
-    return (mo,)
+    return
 
 
 @app.cell
@@ -109,22 +134,14 @@ def __(latexify, mo, select_model):
 
 
 @app.cell
-def __(mo, select_model):
-    from rheo_widgets import make_ui_parameters, make_parameters_from_ui
-
+def __(make_ui_parameters, mo, select_model):
     mo.stop(select_model.value is None)
     get_state, set_state = mo.state(None)
 
 
     ui_parameter = make_ui_parameters(select_model.value.make_params())
     ui_parameter.hstack()
-    return (
-        get_state,
-        make_parameters_from_ui,
-        make_ui_parameters,
-        set_state,
-        ui_parameter,
-    )
+    return get_state, set_state, ui_parameter
 
 
 @app.cell
@@ -177,11 +194,6 @@ def __(
     """
     )
     return FC, condition, model, params, plot_fit_res, res, weight
-
-
-@app.cell
-def __():
-    return
 
 
 if __name__ == "__main__":
