@@ -13,8 +13,6 @@ def __():
 
 @app.cell
 async def __(mo, sys):
-    #only run this cell if kernel is pyodide
-    mo.stop(sys.executable!='/home/pyodide/this.program')
 
     from pyodide.http import pyfetch
 
