@@ -29,7 +29,6 @@ async def __(mo, sys):
     import micropip
 
     await micropip.install("latexify-py")
-    await micropip.install("pybroom")
     await micropip.install("openpyxl")
     await micropip.install("xlrd")
     await micropip.install("lmfit")
@@ -38,7 +37,6 @@ async def __(mo, sys):
 
 @app.cell
 def __():
-    import pybroom
     import latexify
     import openpyxl
     import lmfit
@@ -63,7 +61,6 @@ def __():
         openpyxl,
         pd,
         plt,
-        pybroom,
     )
 
 
