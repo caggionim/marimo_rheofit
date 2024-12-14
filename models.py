@@ -2,6 +2,14 @@
 import lmfit
 import matplotlib.pyplot as plt 
 
+
+def Newtonian(x, eta=0.1):
+    return eta * x
+
+Newtonian_model = lmfit.Model(Newtonian)
+
+Newtonian_model.set_param_hint("eta", min=0)
+
 def zhang(x, mu=10, G0=100, beta=0.01):
     return (x * mu) / (1 + (mu * x / (2 * (G0 + beta * mu * x)) ** 2))
 
@@ -122,15 +130,16 @@ TCCC_model = double_carreau_model + TC_partial_model
 
 
 model_dict = {
+    "Newtonian": Newtonian_model
     "TC": TC_model,
     "Carreau": carreau_model,
     "TCC": TCC_model,
-    "double_carreau": double_carreau_model,
-    "TCCC": TCCC_model,
+    #"double_carreau": double_carreau_model,
+    #"TCCC": TCCC_model,
     "cross": cross_model,
-    "TCCross": TCCross_model,
+    #"TCCross": TCCross_model,
     "zhang": zhang_model,
-    "TCZhang": TCZhang_model,
+    #"TCZhang": TCZhang_model,
 }
 
 def plot_fit_res(
