@@ -130,7 +130,7 @@ TCCC_model = double_carreau_model + TC_partial_model
 
 
 model_dict = {
-    "Newtonian": Newtonian_model
+    "Newtonian": Newtonian_model,
     "TC": TC_model,
     "Carreau": carreau_model,
     "TCC": TCC_model,
