@@ -35,4 +35,4 @@ The flow curve is measured 2 time:
 
 WASM based app hosted on github pages: 
 
-https://caggionim.github.io/marimo_rheofit/
+[https://caggionim.github.io/marimo_rheofit/](https://caggionim.github.io/marimo_rheofit/?show-code=false)
