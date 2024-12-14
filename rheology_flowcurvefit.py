@@ -12,8 +12,7 @@ def __():
 
 
 @app.cell
-async def __(mo, sys):
-
+async def __():
     from pyodide.http import pyfetch
 
     response = await pyfetch("https://raw.githubusercontent.com/caggionim/marimo_rheofit/refs/heads/main/models.py")
