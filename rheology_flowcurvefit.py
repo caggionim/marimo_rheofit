@@ -63,7 +63,7 @@ def __():
 
 @app.cell
 def __(mo):
-    mo.md("""# Rheology flow curve analsys""")
+    mo.md("""# Rheology flow curve analysis""")
     return
 
 
