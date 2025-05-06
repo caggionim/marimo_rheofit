@@ -42,6 +42,13 @@ cross_model.set_param_hint("n", min=0, max=1)
 cross_model.set_param_hint("eta_0", min=0)
 cross_model.set_param_hint("eta_inf", min=0)
 
+def Bingham(x, ystress=0.05, eta_bg=10):
+    return ystress + eta_bg * x
+
+
+Bingham_model = lmfit.Model(Bingham)
+Bingham_model.set_param_hint("ystress", min=0, vary=True)
+Bingham_model.set_param_hint("eta_bg", min=0, vary=True)
 
 def TC(x, ystress=0.05, eta_bg=10, gammadot_crit=0.01):
     return ystress + ystress * (x / gammadot_crit) ** 0.5 + eta_bg * x
@@ -51,6 +58,15 @@ TC_model = lmfit.Model(TC)
 TC_model.set_param_hint("ystress", min=0, vary=True)
 TC_model.set_param_hint("eta_bg", min=0, vary=True)
 TC_model.set_param_hint("gammadot_crit", min=0)
+
+def HB(x, ystress=0.05, K=1, n=0.5):
+    return ystress + K * x ** n
+
+
+HB_model = lmfit.Model(HB)
+HB_model.set_param_hint("ystress", min=0, vary=True)
+HB_model.set_param_hint("K", min=0, vary=True)
+HB_model.set_param_hint("n", min=0)
 
 
 def TC_partial(x, ystress=0.05, gammadot_crit=0.01):
@@ -131,11 +147,13 @@ TCCC_model = double_carreau_model + TC_partial_model
 
 model_dict = {
     "Newtonian": Newtonian_model,
-    "TC": TC_model,
+    "Bingham": Bingham_model,
+    "Herschel–Bulkley": HB_model, 
+    "TC (Three Component)": TC_model,
     "Carreau": carreau_model,
-    "TCC": TCC_model,
+    "TCC (Three Component + Carreau)": TCC_model,
     #"double_carreau": double_carreau_model,
-    #"TCCC": TCCC_model,
+    #"TCCC (Three Component + double Carreau)": TCCC_model,
     "cross": cross_model,
     #"TCCross": TCCross_model,
     "zhang": zhang_model,
