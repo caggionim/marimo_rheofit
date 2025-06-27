@@ -155,7 +155,7 @@ model_dict = {
     #"double_carreau": double_carreau_model,
     #"TCCC (Three Component + double Carreau)": TCCC_model,
     "cross": cross_model,
-    #"TCCross": TCCross_model,
+    "TCCross": TCCross_model,
     "zhang": zhang_model,
     #"TCZhang": TCZhang_model,
 }
